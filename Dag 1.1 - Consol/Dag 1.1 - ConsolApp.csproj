@@ -6,6 +6,7 @@
     <RootNamespace>Dag_1___Consol</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <IncludeSymbols>False</IncludeSymbols>
   </PropertyGroup>
 
 </Project>
