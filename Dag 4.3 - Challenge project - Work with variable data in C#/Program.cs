@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Channels;
 
 internal class Program
 {
@@ -363,36 +364,20 @@ internal class Program
 
                 case "2":
                     // Display all dogs with a multiple search characteristics
-                    string dogCharacteristic = "";
-                    string[] searchTerms = new string[0];
-
-                    while (dogCharacteristic == "")
-                    {
-                        Console.WriteLine("\r\nEnter one or more desired dog characteristics to search for, separated by commas");
-                        readResult = Console.ReadLine();
-                        if (readResult != null)
-                        {
-                            searchTerms = readResult.ToLower().Trim().Split(',').Select(s => s.Trim()).ToArray();
-                            Array.Sort(searchTerms);
-                            dogCharacteristic = string.Join(", ", searchTerms);
-                            Console.WriteLine();
-                        }
-                    }
+                    Console.WriteLine("\r\nEnter one or more desired dog characteristics to search for, separated by commas");
+                    string[] searchTerms = Console.ReadLine()?.ToLower().Trim().Split(',').Select(s => s.Trim()).ToArray();
 
                     bool noMatchesDog = true;
-                    string dogDescription = "";
-                    string[] searchingIcons = { "|", "--", "|", "--" };
 
                     // Update to "rotating" animation with countdown
+                    string[] searchingIcons = { "◢", "◣", "◤", "◥" };
                     for (int countdown = 2; countdown >= 0; countdown--)
                     {
                         foreach (string icon in searchingIcons)
                         {
-                            Console.Write($"\rsearching for dogs with characteristics {dogCharacteristic} {icon}");
+                            Console.Write($"\rSearching for dogs with characteristics {string.Join(", ", searchTerms)} {icon}");
                             Thread.Sleep(250);
                         }
-
-                        Console.Write($"\r{new String(' ', Console.BufferWidth)}");
                     }
 
                     // Loop ourAnimals array to search for matching animals
@@ -400,7 +385,7 @@ internal class Program
                     {
                         if (ourAnimals[i, 1].Contains("dog"))
                         {
-                            dogDescription = ourAnimals[i, 4] + "\r\n" + ourAnimals[i, 5];
+                            string dogDescription = ourAnimals[i, 4] + "\r\n" + ourAnimals[i, 5];
 
                             if (searchTerms.All(term => dogDescription.Contains(term)))
                             {
@@ -413,7 +398,7 @@ internal class Program
 
                     if (noMatchesDog)
                     {
-                        Console.WriteLine("None of our dogs are a match found for: " + dogCharacteristic);
+                        Console.WriteLine("None of our dogs are a match found for: " + string.Join(", ", searchTerms));
                     }
 
                     Console.WriteLine("\n\rPress the Enter key to continue");
