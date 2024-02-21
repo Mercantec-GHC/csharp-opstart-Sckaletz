@@ -11,16 +11,16 @@ internal class Program
         string animalPhysicalDescription = "";
         string animalPersonalityDescription = "";
         string animalNickname = "";
-        string suggestedDonation = "";
+        string suggestedDonation = ""; // NY
 
         // variables that support data entry
         int maxPets = 8;
         string? readResult;
         string menuSelection = "";
-        decimal decimalDonation = 0.00m;
+        decimal decimalDonation = 0.00m; // NY
 
         // array used to store runtime data
-        string[,] ourAnimals = new string[maxPets, 7];
+        string[,] ourAnimals = new string[maxPets, 7]; // NY 7 i stedet for 6
 
         // sample data ourAnimals array entries
         for (int i = 0; i < maxPets; i++)
@@ -34,7 +34,7 @@ internal class Program
                     animalPhysicalDescription = "medium sized cream colored female golden retriever weighing about 45 pounds. housebroken.";
                     animalPersonalityDescription = "loves to have her belly rubbed and likes to chase her tail. gives lots of kisses.";
                     animalNickname = "lola";
-                    suggestedDonation = "85.00";
+                    suggestedDonation = "85.00"; // NY
                     break;
 
                 case 1:
@@ -44,7 +44,7 @@ internal class Program
                     animalPhysicalDescription = "large reddish-brown male golden retriever weighing about 85 pounds. housebroken.";
                     animalPersonalityDescription = "loves to have his ears rubbed when he greets you at the door, or at any time! loves to lean-in and give doggy hugs.";
                     animalNickname = "gus";
-                    suggestedDonation = "49.99";
+                    suggestedDonation = "49.99"; // NY
                     break;
 
                 case 2:
@@ -54,7 +54,7 @@ internal class Program
                     animalPhysicalDescription = "small white female weighing about 8 pounds. litter box trained.";
                     animalPersonalityDescription = "friendly";
                     animalNickname = "snow";
-                    suggestedDonation = "40.00";
+                    suggestedDonation = "40.00"; // NY
                     break;
 
                 case 3:
@@ -64,7 +64,7 @@ internal class Program
                     animalPhysicalDescription = "";
                     animalPersonalityDescription = "";
                     animalNickname = "lion";
-                    suggestedDonation = "";
+                    suggestedDonation = ""; // NY
 
                     break;
 
@@ -87,11 +87,11 @@ internal class Program
             ourAnimals[i, 4] = "Physical description: " + animalPhysicalDescription;
             ourAnimals[i, 5] = "Personality: " + animalPersonalityDescription;
 
-            if (!decimal.TryParse(suggestedDonation, out decimalDonation))
+            if (!decimal.TryParse(suggestedDonation, out decimalDonation)) // NY
             {
                 decimalDonation = 45.00m; // if suggestedDonation NOT a number, default to 45.00
             }
-            ourAnimals[i, 6] = $"Suggested Donation: {decimalDonation:C2}";
+            ourAnimals[i, 6] = $"Suggested Donation: {decimalDonation:C2}"; // NY
         }
 
         // top-level menu options
@@ -122,9 +122,9 @@ internal class Program
                         if (ourAnimals[i, 0] != "ID #: ")
                         {
                             Console.WriteLine();
-                            for (int j = 0; j < 7; j++)
+                            for (int j = 0; j < 7; j++) // NY 7 i stedet for 6
                             {
-                                Console.WriteLine(ourAnimals[i, j].ToString());
+                                Console.WriteLine(ourAnimals[i, j].ToString()); // NY
                             }
                         }
                     }
@@ -134,7 +134,7 @@ internal class Program
 
                     break;
 
-                case "2":
+                case "2":  // NY Stort set helt ny tilføjelse
                     // #1 Display all dogs with a multiple search characteristics
 
                     string dogCharacteristic = "";
