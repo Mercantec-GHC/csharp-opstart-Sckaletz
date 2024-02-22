@@ -366,13 +366,13 @@ internal class Program
                 case "2":
                     // Display all dogs with a multiple search characteristics
                     Console.WriteLine("\r\nEnter one or more desired dog characteristics to search for, separated by commas");
-                    // Read input and convert to lower case, trim space and split into array for searching
-                    string[] searchTerms = Console.ReadLine()?.ToLower().Trim().Split(',').Select(s => s.Trim()).ToArray();
+                    // Read input and convert to lower case, trim space from input and split into array for searching and finally pushed to the array.
+                    string[] searchTerms = Console.ReadLine()?.ToLower().Trim().Split(',').ToArray();
 
                     bool noMatchesDog = true;
 
                     // Update to "rotating" animation with countdown
-                    string[] searchingIcons = { "\\", "|", "--", "\\" };
+                    string[] searchingIcons = { "\\", "|", "--", "/" };
                     for (int countdown = 2; countdown >= 0; countdown--)
                     {
                         foreach (string icon in searchingIcons)
@@ -390,7 +390,7 @@ internal class Program
                         {
                             string dogDescription = ourAnimals[i, 4] + "\r\n" + ourAnimals[i, 5];
 
-                            // If dog with description is found, output the dog and set noMatchesDog to false to indicate at least one dog found.
+                            // If dog with all description is found, output the dog and set noMatchesDog to false to indicate at least one dog found.
                             if (searchTerms.All(term => dogDescription.Contains(term)))
                             {
                                 Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!");
