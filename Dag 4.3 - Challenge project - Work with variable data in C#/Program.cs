@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Channels;
 using System.Globalization;
 
@@ -7,13 +8,41 @@ internal class Program
     public static void Main(string[] args)
     {
         //Starter();
-        Final();
+        //Final();
+        Selector();
     }
 
 
     // --------------------------------------------------------------------------------------------------------------------
     // STARTING POINT
     // --------------------------------------------------------------------------------------------------------------------
+
+    public static void Selector()
+    {
+        Console.WriteLine("Please select '1' for starter solution and '2' for final solution: ");
+        string selection = Console.ReadLine();
+        if (selection != null)
+        {
+            if (selection == "1")
+            {
+                Starter();
+            }
+            else if (selection == "2")
+            {
+                Final();
+            }
+            else
+            {
+                Console.WriteLine("Please enter '1' or '2'");
+            }
+
+        }
+        else
+        {
+            Console.WriteLine("Please enter '1' or '2'");
+        }
+
+    }
 
 
     public static void Starter()
