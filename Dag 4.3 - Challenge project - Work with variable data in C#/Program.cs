@@ -366,6 +366,7 @@ internal class Program
                 case "2":
                     // Display all dogs with a multiple search characteristics
                     Console.WriteLine("\r\nEnter one or more desired dog characteristics to search for, separated by commas");
+                    // Read input and convert to lower case, trim space and split into array for searching
                     string[] searchTerms = Console.ReadLine()?.ToLower().Trim().Split(',').Select(s => s.Trim()).ToArray();
 
                     bool noMatchesDog = true;
@@ -384,19 +385,23 @@ internal class Program
                     // Loop ourAnimals array to search for matching animals
                     for (int i = 0; i < maxPets; i++)
                     {
+                        // Loop through ourAnimals and find "dog"
                         if (ourAnimals[i, 1].Contains("dog"))
                         {
                             string dogDescription = ourAnimals[i, 4] + "\r\n" + ourAnimals[i, 5];
 
+                            // If dog with description is found, output the dog and set noMatchesDog to false to indicate at least one dog found.
                             if (searchTerms.All(term => dogDescription.Contains(term)))
                             {
-                                Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!"); // Need to remove "Nickname" from output
+                                Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!");
+                                // Output dog description
                                 Console.WriteLine(dogDescription);
                                 noMatchesDog = false;
                             }
                         }
                     }
 
+                    // Output if no dog was found with the description
                     if (noMatchesDog)
                     {
                         Console.WriteLine("None of our dogs are a match found for: " + string.Join(", ", searchTerms));
