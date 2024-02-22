@@ -400,7 +400,7 @@ internal class Program
 
                     bool noMatchesDog = true;
 
-                    // Update to "rotating" animation with countdown
+                    // "rotating" animation with countdown
                     string[] searchingIcons = { "\\", "|", "--", "/" };
                     for (int countdown = 2; countdown >= 0; countdown--)
                     {
@@ -419,8 +419,18 @@ internal class Program
                         {
                             string dogDescription = ourAnimals[i, 4] + "\r\n" + ourAnimals[i, 5];
 
-                            // If dog with all description is found, output the dog and set noMatchesDog to false to indicate at least one dog found.
-                            if (searchTerms.All(term => dogDescription.Contains(term)))
+                            bool allTermsFound = true;
+                            foreach (var term in searchTerms)
+                            {
+                                if (!dogDescription.Contains(term))
+                                {
+                                    allTermsFound = false;
+                                    Console.WriteLine();
+                                    break; // Exit the loop as soon as one term is not found
+                                }
+                            }
+                            // If dog with description is found, output the dog and set noMatchesDog to false to indicate at least one dog found.
+                            if (allTermsFound)
                             {
                                 Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!");
                                 // Output dog description
