@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Channels;
+using System.Globalization;
 
 internal class Program
 {
@@ -370,12 +371,12 @@ internal class Program
                     bool noMatchesDog = true;
 
                     // Update to "rotating" animation with countdown
-                    string[] searchingIcons = { "◢", "◣", "◤", "◥" };
+                    string[] searchingIcons = { "\\", "|", "--", "\\" };
                     for (int countdown = 2; countdown >= 0; countdown--)
                     {
                         foreach (string icon in searchingIcons)
                         {
-                            Console.Write($"\rSearching for dogs with characteristics {string.Join(", ", searchTerms)} {icon}");
+                            Console.Write($"\rSearching for dogs with characteristics {string.Join(", ", searchTerms)} {icon} {countdown}..");
                             Thread.Sleep(250);
                         }
                     }
@@ -389,7 +390,7 @@ internal class Program
 
                             if (searchTerms.All(term => dogDescription.Contains(term)))
                             {
-                                Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!");
+                                Console.WriteLine($"\nOur dog {ourAnimals[i, 3]} is a match!"); // Need to remove "Nickname" from output
                                 Console.WriteLine(dogDescription);
                                 noMatchesDog = false;
                             }
